@@ -74,11 +74,8 @@ def dic(x):
 
 print('''
 상황 : 일반적인 배터리를 사용하는 드론과 지속적인 래이져 충전을 사용하는 드론과 태양광 충전을 사용하는 드론 비교
-일반 드론 : 일반 배터리, 추가전원 X
-래이저 무선충전 드론 : 일반 배터리, 분당 150mA 충전
-태양광 충전 드론 : 일반 배터리, 분당'''
 
-태양광 사용이 불가능한 날씨가 좋지 않은 날은 드론 운행 불가
+태양광 사용이 불가능한 날은 날씨가 좋지 않아 드론또한 운행이 불가능하므로 제외
 (3초 후 시뮬레이션 시작)
 ''')
 
@@ -86,11 +83,12 @@ ti.sleep(3)
 
 #시뮬래이션 ###################################################################
 
-env = si.Environment()
-
 i = int(input('반복횟수 입력 >>>'))
 
 for a in range(i) :
+
+    env = si.Environment()
+
     print('일반 드론 - 1번 드론')
     # ti.sleep(1)
     env.process(dron_1(env))
@@ -134,9 +132,6 @@ for a in range(i) :
     gps_np = np.array([dron_gps_1[0], dron_gps_2[0], dron_gps_3[0]])
     l_np = np.vstack((l_np, gps_np))
 
-# print(l)
-# l = pd.DataFrame(l)
-# print(l)
 np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 print(l_np)
 print('결과')
